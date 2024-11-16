@@ -35,7 +35,7 @@ docker-compose.override.yml
 
 # Ignore anything generated in the container
 /container-data/
-*.sql
+# *.sql
 *.sql.gz
 
 # Uploaded files
@@ -55,7 +55,7 @@ bootstrap/cache/*
 
 # Ignore secrets or sensitive files
 secrets/
-# *.key
+*.key
 *.pem
 certs/
 
