@@ -55,7 +55,7 @@ bootstrap/cache/*
 
 # Ignore secrets or sensitive files
 secrets/
-*.key
+# *.key
 *.pem
 certs/
 
