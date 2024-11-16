@@ -1,0 +1,47 @@
+version: '3.8' # Specifies the Docker Compose file format version.
+
+services:
+  php:
+    # Defines the PHP service.
+    build:
+      context: . # Uses the current directory to build the PHP image.
+    volumes:
+      - .:/var/www/html # Mounts the current directory to /var/www/html in the container.
+    ports:
+      - "8000:8000" # Maps port 8000 on the host to port 8000 on the container.
+    depends_on:
+      - db # Ensures the PHP service starts after the MySQL database service.
+
+  db:
+    # Defines the MySQL database service.
+    image: mysql:8.0 # Uses the official MySQL version 8.0 image.
+    container_name: mysql # Sets the name of the MySQL container to "mysql".
+    restart: always # Ensures the database service always restarts on failure or system reboot.
+    environment:
+      # Environment variables to configure the MySQL database.
+      MYSQL_ROOT_PASSWORD: h4Si3fiVeADnXy2 # Root password for MySQL.
+      MYSQL_DATABASE: expense_db # Creates a database named "expense_db".
+      MYSQL_USER: my_user # Creates a user named "my_user".
+      MYSQL_PASSWORD: h4Si3fiVeADnXy2 # Password for the "my_user".
+    ports:
+      - "3306:3306" # Maps port 3306 on the host to port 3306 on the container.
+    volumes:
+      - db_data:/var/lib/mysql # Persists MySQL data using a named volume "db_data".
+
+  phpmyadmin:
+    # Defines the phpMyAdmin service.
+    image: phpmyadmin/phpmyadmin # Uses the official phpMyAdmin image.
+    restart: always # Ensures phpMyAdmin service always restarts on failure or system reboot.
+    depends_on:
+      - db # Ensures phpMyAdmin starts after the MySQL database service.
+    ports:
+      - "8081:80" # Maps port 8081 on the host to port 80 on the container (phpMyAdmin UI).
+    environment:
+      # Environment variables to configure phpMyAdmin.
+      PMA_HOST: db # Sets the hostname for the MySQL service (uses the service name "db").
+      PMA_PORT: 3306 # Configures phpMyAdmin to connect to MySQL on port 3306.
+      MYSQL_ROOT_PASSWORD: h4Si3fiVeADnXy2 # Root password to connect to the MySQL database.
+
+volumes:
+  db_data:
+    # Defines a named volume "db_data" to persist MySQL database files.

@@ -1,0 +1,74 @@
+# Composer dependencies
+/vendor/
+/composer.lock
+
+# Environment variables
+.env
+.env.*
+
+# PHPStorm / IntelliJ IDEA project files
+.idea/
+
+# PHPunit
+/.phpunit.result.cache
+/build/
+phpunit.xml
+phpunit.xml.dist
+
+# Logs and temp files
+*.log
+*.cache
+*.tmp
+/tmp/
+logs/
+*.pid
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Node.js (if you have frontend dependencies)
+/node_modules/
+
+# Docker files and containers
+docker-compose.override.yml
+
+# Ignore anything generated in the container
+/container-data/
+*.sql
+*.sql.gz
+
+# Uploaded files
+/public/uploads/
+storage/
+uploads/
+
+# Cache and compiled code
+/cache/
+compiled/
+*.phpunit.cache
+bootstrap/cache/*
+
+# Ignore compiled Sass or CSS files if applicable
+/public/css/
+/public/js/
+
+# Ignore secrets or sensitive files
+secrets/
+*.key
+*.pem
+certs/
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*~
+
+# PHPUnit coverage reports
+/coverage/
+
+# Specific vendor tools (Symfony, Laravel, etc.)
+/public/storage
+/storage/*.key
+/storage/logs
