@@ -7,6 +7,9 @@ WORKDIR /var/www/html
 # Copy your application files
 COPY . .
 
+# Copy keys into the container
+COPY keys /var/www/html/keys
+
 # Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
     unzip \
