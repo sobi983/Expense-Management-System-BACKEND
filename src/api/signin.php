@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../utils/jwt.php';
+require_once __DIR__ . '/../config/database.php'; 
+require_once __DIR__ . '/../utils/jwt.php'; 
 require_once __DIR__ . '/../utils/security.php';
 
 $data = json_decode(file_get_contents("php://input"));
@@ -18,29 +18,38 @@ $db = (new Database())->getConnection();
 $email = sanitizeInput($data->email);
 $password = sanitizeInput($data->password);
 
-// Check if the user exists
-$query = "SELECT id, username, password FROM users WHERE email = :email";
+// Find the user in the database
+$query = "SELECT id, username, password, role FROM users WHERE email = :email";
 $stmt = $db->prepare($query);
-$stmt->bindParam(':email', $email);  // Bind the sanitized email
+$stmt->bindParam(':email', $email);
 $stmt->execute();
+
+if ($stmt->rowCount() === 0) {
+    http_response_code(401);
+    echo json_encode(["message" => "Invalid email or password"]);
+    exit;
+}
 
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$user) {
-    http_response_code(401);
-    echo json_encode(["message" => "User not found"]);
-    exit;
-}
-
 // Verify the password
-if (!password_verify($password, $user['password'])) {  // Verify the sanitized password
+if (!password_verify($password, $user['password'])) {
     http_response_code(401);
-    echo json_encode(["message" => "Invalid password"]);
+    echo json_encode(["message" => "Invalid email or password"]);
     exit;
 }
 
-// Generate JWT token
-$token = generateJWT($user['id'], $user['username']);
+// Generate a JWT token
+$token = generateJWT($user['id'], $user['username'], $user['role']);
 
-echo json_encode(["message" => "Signin successful", "token" => $token]);
-
+// Return the token and user details
+echo json_encode([
+    "message" => "Login successful",
+    "token" => $token,
+    "user" => [
+        "id" => $user['id'],
+        "username" => $user['username'],
+        "role" => $user['role']
+    ]
+]);
+?>

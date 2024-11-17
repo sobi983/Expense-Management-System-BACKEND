@@ -5,17 +5,18 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-function generateJWT($userId, $username) {
+function generateJWT($userId, $username, $role) {
     //keys permission chmod 600
     $key = file_get_contents('/var/www/html/keys/private.key'); // Secret key to encode the JWT token
     $issuedAt = time();
     $expirationTime = $issuedAt + 3600;  // jwt valid for 1 hour from the issued time
-    $payload = array(
+    $payload = [
         "userId" => $userId,
         "username" => $username,
+        "role" => $role,
         "iat" => $issuedAt,
         "exp" => $expirationTime
-    );
+    ];
     return JWT::encode($payload, $key, 'RS256');
 }
 

@@ -32,7 +32,7 @@ class Database {
 
             // Execute the SQL commands to create tables
             $this->conn->exec($sql);
-            echo "Database and tables created successfully.";
+            // echo "Database and tables created successfully.";   //uncomment it for very first time project setup
         } catch (PDOException $e) {
             echo "Database error: " . $e->getMessage();
         } catch (Exception $e) {
