@@ -2,6 +2,9 @@
 // Define the base route
 $baseRoute = '/api/v1';
 
+// Defining the response type
+header('Content-Type: application/json; charset=utf-8');
+
 // Get the current request URI and parse the path and query
 $requestUri = $_SERVER['REQUEST_URI'];
 $requestPath = parse_url($requestUri, PHP_URL_PATH);

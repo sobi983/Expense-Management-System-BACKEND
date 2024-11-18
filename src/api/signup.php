@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/database.php'; 
+require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../utils/security.php';
 
 $data = json_decode(file_get_contents("php://input"));
@@ -7,7 +7,14 @@ $data = json_decode(file_get_contents("php://input"));
 // Validate the input data
 if (empty($data->username) || empty($data->email) || empty($data->password)) {
     http_response_code(400);
-    echo json_encode(["message" => "Please provide username, email, and password"]);
+    echo json_encode(["status" => false, "message" => "Please provide username, email, and password"]);
+    exit;
+}
+
+// Validate invalid emails
+if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(["status" => false, "message" => "Invalid email format."]);
     exit;
 }
 
@@ -28,7 +35,7 @@ $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
     http_response_code(400);
-    echo json_encode(["message" => "User with this email or username already exists"]);
+    echo json_encode(["status" => false, "message" => "User with this email or username already exists"]);
     exit;
 }
 
@@ -44,9 +51,8 @@ $stmt->bindParam(':password', $hashed_password);
 $stmt->bindParam(':role', $role);
 
 if ($stmt->execute()) {
-    echo json_encode(["message" => "User registered successfully"]);
+    echo json_encode(["status" => true, "message" => "User registered successfully"]);
 } else {
     http_response_code(500);
-    echo json_encode(["message" => "Failed to register user"]);
+    echo json_encode(["status" => false, "message" => "Failed to register user"]);
 }
-
