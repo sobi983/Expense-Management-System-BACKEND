@@ -23,7 +23,7 @@ docker-compose up
 
 # How to call API's
 
-- Sign Up API Endpoint
+# Sign Up API Endpoint
 - http://localhost:8000/api/v1/signup
 - Req
 
@@ -36,7 +36,7 @@ docker-compose up
 }
 ```
 
-- Sign In  API Endpoint
+# Sign In  API Endpoint
 - http://localhost:8000/api/v1/signin
 - Req
 
@@ -47,7 +47,7 @@ docker-compose up
 }
 ```
 
-- Validate JWT  API Endpoint
+# Validate JWT  API Endpoint
 - http://localhost:8000/api/v1/validate
 - Put the JWT token into the Auth type. You can get the token from the Sign In API
 
@@ -57,7 +57,7 @@ Auth Type: Bearer Token
 Example:- eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiam9obl9kb2UiLCJyb2xlIjoidXNlciIsImlhdCI6MTczMjAyMTE2MywiZXhwIjoxNzMyMDI0NzYzfQ.U6xxkNC2fWoPMYJFD0SsU-fPV6Gp0-N_Cm0wTy9ooWKfzF2i73cpJZeyFjJlEFxez3CV9FUdCArgN3OTUluD-HTK3XwLcK-yVNvYQqzt6gb55pVd2rfQZXSXPKCfOodK_zMM54cpn-9Ns-ms6RB0rB62RGrWWu8yd4NZWwZSu1g
 ```
 
-- Create Expense API Endpoint
+# Create Expense API Endpoint
 - http://localhost:8000/api/v1/createExpense
 - Req
 - Send token in the header 
@@ -71,7 +71,7 @@ Example:- eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoia
 }
 ```
 
-- Edit Expense API Endpoint
+# Edit Expense API Endpoint
 - http://localhost:8000/api/v1/editExpense?id=12
 - Req
 - Send token in the header 
@@ -86,15 +86,15 @@ Example:- eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoia
 }
 ```
 
-- Get User Expense API Endpoint
+# Get User Expense API Endpoint
 - http://localhost:8000/api/v1/getExpense
 - Send token in the header 
 
-- Get All Expenses API Endpoint
+# Get All Expenses API Endpoint
 - http://localhost:8000/api/v1/getAllExpenses
 - Send token in the header 
 
-- Delete Expense API Endpoint
+# Delete Expense API Endpoint
 - http://localhost:8000/api/v1/deleteExpense?id=13
 - Send token in the header 
 - Send the param in the API eg. 13
