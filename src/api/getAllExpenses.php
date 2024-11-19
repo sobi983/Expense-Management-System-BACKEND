@@ -1,15 +1,19 @@
 <?php
+
+// Importing files 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../utils/security.php';
 require_once __DIR__ . '/../middleware/tokenvalidation.php';
 require_once __DIR__ . '/../helper/logAction.php';
 
+// Setting Header for Bearer Token
 $request = [
     'Authorization' => getallheaders()['Authorization'] ?? null
 ];
 
-$authUser = jwtMiddleware($request);
+$authUser = jwtMiddleware($request); // Middleware for authentication and role validation
 
+// Admin role only
 if ($authUser['user']['role'] !== 'admin') {
     http_response_code(403);
     echo json_encode(["status" => false, "message" => "Access denied."]);
@@ -19,9 +23,10 @@ if ($authUser['user']['role'] !== 'admin') {
 $category = $_GET['category'] ?? null;
 $date = $_GET['date'] ?? null;
 
-// Dynamic query for admin filtering
+// DB connection object
 $db = (new Database())->getConnection();
 
+// Dynamic query for admin filtering
 $query = "SELECT id, user_id, amount, category, description, expense_date, created_at FROM expenses WHERE 1=1";
 $params = [];
 
@@ -35,8 +40,9 @@ if ($date) {
 }
 
 $stmt = $db->prepare($query);
-$stmt->execute($params);
+$stmt->execute($params); // Query executed
 
+// Fetch all records from theb table
 $expenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode(["status" => true, "message" => $expenses]);
 ?>

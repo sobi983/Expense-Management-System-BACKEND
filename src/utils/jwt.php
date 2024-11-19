@@ -6,7 +6,7 @@ use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 function generateJWT($userId, $username, $role) {
-    //keys permission chmod 600
+    //keys permission chmod 600 for file directory
     $key = file_get_contents('/var/www/html/keys/private.key'); // Secret key to encode the JWT token
     $issuedAt = time();
     $expirationTime = $issuedAt + 3600;  // jwt valid for 1 hour from the issued time
@@ -24,7 +24,7 @@ function validateJWT($token) {
     //keys permission chmod 644
     $key = file_get_contents('/var/www/html/keys/public.key'); // The secret key used for encoding and decoding
     try {
-        // Use the new `Key` object as per the library's updated signature
+       
         $decoded = JWT::decode($token, new Key($key, 'RS256'));
         return (array) $decoded; // Return the decoded token as an associative array
     } catch (Exception $e) {

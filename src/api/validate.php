@@ -1,12 +1,13 @@
 <?php
 
+// Importing file
 require_once __DIR__ . '/../middleware/tokenvalidation.php';
 
 $request = [
     'Authorization' => getallheaders()['Authorization'] ?? null
 ];
 
-// Pass the request through the middleware
+// Passing the request through the middleware
 $request = jwtMiddleware($request);
 
 // If the token is valid, return a success response

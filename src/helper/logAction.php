@@ -1,4 +1,6 @@
 <?php
+
+// This is the helper fucntion to be called to maintain the logs 
 function logAction($db, $userId, $expenseId, $actionType, $description) {
     $query = "
         INSERT INTO action_logs (user_id, expense_id, action_type, description, user_agent, os, ip_address) 

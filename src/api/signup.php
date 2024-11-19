@@ -1,4 +1,6 @@
 <?php
+
+// Importing files 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../utils/security.php';
 
@@ -18,6 +20,7 @@ if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
+// DB connection object
 $db = (new Database())->getConnection();
 
 // Sanitize input values
@@ -33,6 +36,7 @@ $stmt->bindParam(':email', $email);
 $stmt->bindParam(':username', $username);
 $stmt->execute();
 
+// If more than or equal to 1 data fround then the user exists
 if ($stmt->rowCount() > 0) {
     http_response_code(400);
     echo json_encode(["status" => false, "message" => "User with this email or username already exists"]);

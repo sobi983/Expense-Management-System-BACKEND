@@ -1,8 +1,11 @@
 <?php
+
+// Importing files 
 require_once __DIR__ . '/../config/database.php'; 
 require_once __DIR__ . '/../utils/jwt.php'; 
 require_once __DIR__ . '/../utils/security.php';
 
+// Converted into the object
 $data = json_decode(file_get_contents("php://input"));
 
 // Validate the input data
@@ -12,6 +15,7 @@ if (empty($data->email) || empty($data->password)) {
     exit;
 }
 
+// DB connection object
 $db = (new Database())->getConnection();
 
 // Sanitize input values
@@ -30,6 +34,7 @@ if ($stmt->rowCount() === 0) {
     exit;
 }
 
+// Fetching the data from DB
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // Verify the password
@@ -39,7 +44,7 @@ if (!password_verify($password, $user['password'])) {
     exit;
 }
 
-// Generate a JWT token
+// Generate a JWT token for the session
 $token = generateJWT($user['id'], $user['username'], $user['role']);
 
 // Return the token and user details
