@@ -1,6 +1,6 @@
 # Project Name
 
-Expense Tracker App
+Expense Tracker App Backend
 
 ### Prerequisites
 List what is needed to install and run the project, 
