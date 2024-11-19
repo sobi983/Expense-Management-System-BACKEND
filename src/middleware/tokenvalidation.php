@@ -12,7 +12,7 @@ function jwtMiddleware($request) {
     if (!$authHeader) {
         // If no token is provided, return unauthorized error
         http_response_code(401);
-        echo json_encode(["message" => "Authorization token is required."]);
+        echo json_encode(["status" => false, "message" => "Authorization token is required."]);
         exit();
     }
 
@@ -21,7 +21,7 @@ function jwtMiddleware($request) {
 
     if (!$token) {
         http_response_code(401);
-        echo json_encode(["message" => "Token not provided."]);
+        echo json_encode(["status" => false, "message" => "Token not provided."]);
         exit();
     }
 
@@ -30,7 +30,7 @@ function jwtMiddleware($request) {
 
     if ($decoded === null) {
         http_response_code(401);
-        echo json_encode(["message" => "Invalid or expired token."]);
+        echo json_encode(["status" => false, "message" => "Invalid or expired token."]);
         exit();
     }
 

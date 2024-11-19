@@ -2,6 +2,18 @@
 // Define the base route
 $baseRoute = '/api/v1';
 
+// CORS headers
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Credentials: true");
+
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204); // No Content
+    exit();
+}
+
 // Defining the response type
 header('Content-Type: application/json; charset=utf-8');
 
@@ -48,7 +60,7 @@ if (strpos($requestPath, $baseRoute) === 0) {
             // Ensure 'id' is present in query params
             if (!isset($queryParams['id']) || !is_numeric($queryParams['id'])) {
                 http_response_code(400);
-                echo json_encode(["message" => "Missing or invalid 'id' parameter."]);
+                echo json_encode(["status" => false, "message" => "Missing or invalid 'id' parameter."]);
                 exit;
             }
 
@@ -60,11 +72,11 @@ if (strpos($requestPath, $baseRoute) === 0) {
             // Ensure 'id' is present in query params
             if (!isset($queryParams['id']) || !is_numeric($queryParams['id'])) {
                 http_response_code(400);
-                echo json_encode(["message" => "Missing or invalid 'id' parameter."]);
+                echo json_encode(["status" => false, "message" => "Missing or invalid 'id' parameter."]);
                 exit;
             }
 
-            // Pass 'id' to the editExpense script
+            // Pass 'id' to the deleteExpense script
             $_GET['id'] = $queryParams['id'];
             require 'src/api/deleteExpense.php';
             break;
@@ -73,12 +85,11 @@ if (strpos($requestPath, $baseRoute) === 0) {
             break;
         default:
             http_response_code(404);
-            echo json_encode(["message" => "Endpoint not found"]);
+            echo json_encode(["status" => false, "message" => "Endpoint not found"]);
             break;
     }
 } else {
     // Base route not matched
     http_response_code(404);
-    echo json_encode(["message" => "Base route not found"]);
+    echo json_encode(["status" => false, "message" => "Base route not found"]);
 }
-?>

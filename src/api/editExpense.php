@@ -15,7 +15,7 @@ $expenseId = $_GET['id'] ?? null;
 
 if (!$expenseId || !$data || empty($data['amount']) || empty($data['category']) || empty($data['expense_date'])) {
     http_response_code(400);
-    echo json_encode(["message" => "Invalid input."]);
+    echo json_encode(["status" => false, "message" => "Invalid input."]);
     exit;
 }
 
@@ -48,9 +48,9 @@ if ($authUser['user']['role'] !== 'admin') {
 
 if ($stmt->execute($params)) {
     logAction($db, $authUser['user']['userId'], $expenseId, 'UPDATE', 'Expense updated');
-    echo json_encode(["message" => "Expense updated successfully."]);
+    echo json_encode(["status" => true, "message" => "Expense updated successfully."]);
 } else {
     http_response_code(500);
-    echo json_encode(["message" => "Failed to update expense."]);
+    echo json_encode(["status" => false, "message" => "Failed to update expense."]);
 }
 ?>

@@ -33,5 +33,5 @@ $stmt = $db->prepare($query);
 $stmt->execute($params);
 
 $expenses = $stmt->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($expenses);
+echo json_encode(["status" => true, "message" => $expenses]);
 ?>

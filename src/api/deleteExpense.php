@@ -13,7 +13,7 @@ $authUser = jwtMiddleware($request);
 $expenseId = $_GET['id'] ?? null;
 if (!$expenseId) {
     http_response_code(400);
-    echo json_encode(["message" => "Expense ID is required."]);
+    echo json_encode(["status" => false, "message" => "Expense ID is required."]);
     exit;
 }
 
@@ -33,9 +33,9 @@ if ($authUser['user']['role'] !== 'admin') {
 
 if ($stmt->execute($params)) {
     logAction($db, $authUser['user']['userId'], $expenseId, 'DELETE', 'Expense deleted');
-    echo json_encode(["message" => "Expense deleted successfully."]);
+    echo json_encode(["status" => true, "message" => "Expense deleted successfully."]);
 } else {
     http_response_code(500);
-    echo json_encode(["message" => "Failed to delete expense."]);
+    echo json_encode(["status" => false, "message" => "Failed to delete expense."]);
 }
 ?>

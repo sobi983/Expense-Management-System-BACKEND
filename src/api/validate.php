@@ -12,6 +12,7 @@ $request = jwtMiddleware($request);
 // If the token is valid, return a success response
 http_response_code(200);
 echo json_encode([
+    "status" => true,
     "message" => "Token is valid!",
     "user" => $request['user'] // This contains the decoded token payload
 ]);
