@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "f39f8a9a-2590-4b92-8fe4-1c6ddfb78575",
+		"name": "Expense Tracker App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13996957"
+	},
+	"item": [
+		{
+			"name": "Signup API",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"email\": \"admin\",\r\n    \"password\": \"password123\",\r\n    \"role\" : \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In API",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate JWT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzIwMTY4MTEsImV4cCI6MTczMjAyMDQxMX0.4t_3sBz-AmRXDGFhMDhLmnHrJukPUBJLTS3Zp0uW8NIO4LyzaLTntNS6fnruGEw5Riw343V7qkSKl72zIwtZesPTeuplGT4Sas7Y0397Tr9ysOlfLnzcczwUEfx5HQ0KI6zxDYJNVH1_NMg2YfaWcYEPFS1kkveq0sHbav0DA9w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Expense",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzE4NjM3NzUsImV4cCI6MTczMTg2NzM3NX0.TmwAODYB_w69Qc9BXi6Ju1K-46mY8qFtezLDTIj2N4SlzHz67S9_xzaLbhzJVYwEE8uhbGa6dtpNYJqjLH78fb4agBuaCcqVmLHFGLO-R9byCvwGtyyk7api48uREHyuzqTzfKM2_3WTdkY6ygzzn_J8CyDDqOIGIBtf2b8Mx0k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 0.1,\r\n  \"category\": \"Restaurant\",\r\n  \"description\": \"Albaik\",\r\n  \"expense_date\": \"2023-11-01\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/createExpense",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"createExpense"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Expense",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzE4NjM3NzUsImV4cCI6MTczMTg2NzM3NX0.TmwAODYB_w69Qc9BXi6Ju1K-46mY8qFtezLDTIj2N4SlzHz67S9_xzaLbhzJVYwEE8uhbGa6dtpNYJqjLH78fb4agBuaCcqVmLHFGLO-R9byCvwGtyyk7api48uREHyuzqTzfKM2_3WTdkY6ygzzn_J8CyDDqOIGIBtf2b8Mx0k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 534340.00,\r\n  \"category\": \"Travel\",\r\n  \"description\": \"Cab fare\",\r\n  \"expense_date\": \"2024-11-17\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/editExpense?id=12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"editExpense"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Expense",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzE4NjM3NzUsImV4cCI6MTczMTg2NzM3NX0.TmwAODYB_w69Qc9BXi6Ju1K-46mY8qFtezLDTIj2N4SlzHz67S9_xzaLbhzJVYwEE8uhbGa6dtpNYJqjLH78fb4agBuaCcqVmLHFGLO-R9byCvwGtyyk7api48uREHyuzqTzfKM2_3WTdkY6ygzzn_J8CyDDqOIGIBtf2b8Mx0k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/deleteExpense?id=13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"deleteExpense"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Expense",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzIwMTY4MTEsImV4cCI6MTczMjAyMDQxMX0.4t_3sBz-AmRXDGFhMDhLmnHrJukPUBJLTS3Zp0uW8NIO4LyzaLTntNS6fnruGEw5Riw343V7qkSKl72zIwtZesPTeuplGT4Sas7Y0397Tr9ysOlfLnzcczwUEfx5HQ0KI6zxDYJNVH1_NMg2YfaWcYEPFS1kkveq0sHbav0DA9w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/getExpense",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"getExpense"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Expenses",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzIwMTY4MTEsImV4cCI6MTczMjAyMDQxMX0.4t_3sBz-AmRXDGFhMDhLmnHrJukPUBJLTS3Zp0uW8NIO4LyzaLTntNS6fnruGEw5Riw343V7qkSKl72zIwtZesPTeuplGT4Sas7Y0397Tr9ysOlfLnzcczwUEfx5HQ0KI6zxDYJNVH1_NMg2YfaWcYEPFS1kkveq0sHbav0DA9w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/getAllExpenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"getAllExpenses"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
