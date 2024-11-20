@@ -8,14 +8,14 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Validate the input data
 if (empty($data->username) || empty($data->email) || empty($data->password)) {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(["status" => false, "message" => "Please provide username, email, and password"]);
     exit;
 }
 
 // Validate invalid emails
 if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(["status" => false, "message" => "Invalid email format."]);
     exit;
 }
@@ -38,7 +38,7 @@ $stmt->execute();
 
 // If more than or equal to 1 data fround then the user exists
 if ($stmt->rowCount() > 0) {
-    http_response_code(400);
+    http_response_code(200);
     echo json_encode(["status" => false, "message" => "User with this email or username already exists"]);
     exit;
 }
